@@ -13,8 +13,13 @@
   padding: 12px 4px 25px 0;
 }
 
+
 .top-header li {
   font-size: 12px;
+}
+
+.top-header li:hover {
+  cursor: pointer;
 }
 
 hr {
@@ -46,6 +51,11 @@ main {
   text-decoration: none;
   display: flex;
   align-items: center;
+  gap: 5px;
+}
+
+.header-actions{
+  display: flex;
   gap: 5px;
 }
 
@@ -83,9 +93,8 @@ main {
   border-radius: 50%;
 }
 
-.btn-love {
+#bookmark-icon {
   font-size: 20px;
-  font-weight: bold;
   color: red;
 }
 
@@ -97,6 +106,7 @@ main {
   margin: 20px 0;
   border-radius: 12px;
   overflow: hidden;
+  position: relative;
 }
 
 .gallery img {
@@ -114,6 +124,109 @@ main {
   grid-template-columns: 1fr 1fr;
   gap: 2px;
 }
+
+
+/* // ---------------------------------------image slider--------------------------- */
+ /* Trigger button style */
+ .travel-slider-open-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  background-color: #01101f;
+  opacity: .7;
+  border: none;
+  border-radius: 4px;
+}
+
+/* Modal background */
+.travel-slider-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal content */
+.travel-slider-content {
+  position: relative;
+  width: 80%;
+  max-width: 800px;
+  background: #102040;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+}
+
+/* Image styling */
+#travelSliderImage{
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+  height: 600;
+}
+
+/* Title */
+.travel-slider-title {
+  font-size: 18px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+/* Close button */
+.travel-slider-close-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+/* Previous and Next buttons */
+.travel-slider-prev-btn, .travel-slider-next-btn {
+  position: absolute;
+  bottom: 5%;
+  transform: translateY(-50%);
+  background: none;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+}
+
+.travel-slider-prev-btn {
+  left: 10%;
+}
+
+.travel-slider-next-btn {
+  right: 10%;
+}
+
+/* Image count */
+.travel-slider-count {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  font-size: 14px;
+}
+/* // ---------------------------------------image slider--------------------------- */
 
 /* tab */
 input[type="radio"] {
@@ -333,7 +446,7 @@ input[type="radio"]:checked + .tab-label {
   grid-template-columns: repeat(3, 1fr);
   gap: 5px;
   flex-wrap: wrap;
-  width: 32px;
+  width: 36px;
 }
 
 .logo-dot {
@@ -341,6 +454,22 @@ input[type="radio"]:checked + .tab-label {
   height: 10px;
   background: white;
   border-radius: 2px;
+
+}
+/* .logo-dot-2 {
+  margin-top: -4px;
+}
+
+.logo-dot-4 {
+ margin-left: -4px;
+} */
+
+.logo-dot-6 {
+ margin-right: -8px;
+ /* background: #1a2235; */
+}
+.logo-dot-8{
+ margin-bottom: -4px;
 }
 
 .logo-dot-5 {
@@ -435,7 +564,265 @@ input[type="radio"]:checked + .tab-label {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 12px;
+  width: 100%;
 }
+
+/* ---------------------------------------------------------------------------- */
+.travel-trigger-button {
+  width: 100%;
+  }
+  
+  .travel-modal-container {
+    position: absolute;
+    display: none;
+    z-index: 1000;
+  }
+  
+  .travel-modal-container.show {
+    display: block;
+  }
+  
+  .travel-modal {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: white;
+    position: relative;
+    margin-top: 8px;
+  }
+  
+  /* Add a small triangle pointer to the modal */
+  .travel-modal::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    transform: rotate(45deg);
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+  }
+  
+  .travel-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .travel-modal-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .travel-close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+  }
+  
+  .travel-close-button:hover {
+    color: #333;
+  }
+  
+  .travel-traveler-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  
+  .travel-traveler-info {
+    flex-grow: 1;
+  }
+  
+  .travel-traveler-type {
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+  
+  .travel-traveler-age {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .travel-counter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .travel-counter button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    background: white;
+    color: #333;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+  
+  .travel-counter button:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .travel-counter span {
+    min-width: 20px;
+    text-align: center;
+    font-size: 16px;
+  }
+/* ---------------------------------------------------------------------------- */
+
+/* ----------------------travelers modal--------------------- */
+.travel-trigger-button {
+width: 100%;
+}
+
+.travel-modal-container {
+  position: absolute;
+  display: none;
+  z-index: 1000;
+}
+
+.travel-modal-container.show {
+  display: block;
+}
+
+.travel-modal {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: white;
+  position: relative;
+  margin-top: 8px;
+}
+
+/* Add a small triangle pointer to the modal */
+.travel-modal::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 20px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  transform: rotate(45deg);
+  border-left: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+}
+
+.travel-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.travel-modal-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.travel-close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+}
+
+.travel-close-button:hover {
+  color: #333;
+}
+
+.travel-traveler-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.travel-traveler-info {
+  flex-grow: 1;
+}
+
+.travel-traveler-type {
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+.travel-traveler-age {
+  font-size: 12px;
+  color: #666;
+}
+
+.travel-counter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.travel-counter button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background: white;
+  color: #333;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.travel-counter button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.travel-counter span {
+  min-width: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+/* ----------------------travelars modal--------------------- */
+
 
 .date-label {
   font-size: 14px;
@@ -1415,6 +1802,196 @@ h2 {
 .contact-button:hover {
   border-color: rgba(0, 0, 0, 0.4);
 }
+
+
+
+/* --------------------MODAL------------------------------- */
+.modal-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 500px;
+  position: relative;
+  animation: modalFade 0.3s ease-in-out;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.close-icon-btn{
+  color: #005bb5;
+  border: none;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  color: #666;
+}
+
+.close-button:hover {
+  color: #000;
+}
+
+.modal-content {
+  margin-bottom: 15px;
+}
+
+.modal-footer {
+  text-align: right;
+}
+
+/* ----------------------------------exrea-------------------------- */
+.popup {
+  /* width: 350px; */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+}
+
+.popup-content {
+  margin-top: 15px;
+}
+
+.warning {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #f39c12;
+  margin-bottom: 10px;
+}
+
+.warning span {
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.info {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+select {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+select[disabled] {
+  color: #bbb;
+  cursor: not-allowed;
+}
+
+.save-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007aff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #005bb5;
+}
+/* ------------------------------------------------------------------ */
+
+@keyframes modalFade {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Utility class for showing the modal */
+.show {
+  display: flex !important;
+}
+
+/* Styles for the trigger button */
+.open-modal-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.open-modal-btn:hover {
+  background-color: #0056b3;
+}
+/* --------------------MODAL END------------------------------- */
 
 @media screen and (max-width: 480px) and (min-width: 320px) {
   body {
