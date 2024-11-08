@@ -1,30 +1,124 @@
 //   --------------------- Country MODAL-----------------
-// Get the modal container
-let modalContainer = document.getElementById("modalContainer");
+ // Get the modal container
+ let modalContainer = document.getElementById("modalContainer");
 
-// Function to open modal
-function openCountryModal() {
-  modalContainer.classList.add("show");
-}
+ // Function to open modal
+ function openCountryModal() {
+     modalContainer.classList.add("show");
+ }
 
-// Function to close modal
-function closeCountryModal() {
-  modalContainer.classList.remove("show");
-}
+ // Function to close modal
+ function closeCountryModal() {
+     modalContainer.classList.remove("show");
+ }
 
-// Close modal when clicking outside
-modalContainer.addEventListener("click", function (event) {
-  if (event.target === modalContainer) {
-    closeCountryModal();
-  }
-});
+ // Close modal when clicking outside
+ modalContainer.addEventListener("click", function (event) {
+     if (event.target === modalContainer) {
+         closeCountryModal();
+     }
+ });
 
-// Close modal with Escape key
-document.addEventListener("keydown", function (event) {
-  if (event.key === "Escape" && modalContainer.classList.contains("show")) {
-    closeCountryModal();
-  }
-});
+ // Close modal with Escape key
+ document.addEventListener("keydown", function (event) {
+     if (event.key === "Escape" && modalContainer.classList.contains("show")) {
+         closeCountryModal();
+     }
+ });
+
+ // Mapping of regions to their currencies
+ const regionCurrencyMap = {
+     "Portugal": ["EUR"],
+     "United States": ["USD"],
+     "Canada": ["CAD"],
+     "Germany": ["EUR"],
+     // Add more region-currency pairs as needed
+ };
+
+ // Function to update currency options based on selected region
+ function updateCurrencyOptions() {
+     const regionSelect = document.getElementById("region");
+     const currencySelect = document.getElementById("currency");
+     const selectedRegion = regionSelect.value;
+
+     // Clear existing currency options
+     currencySelect.innerText = "";
+
+     // Get the currency options for the selected region
+     const currencies = regionCurrencyMap[selectedRegion];
+     currencySelect.value=currencies;
+
+     let countryName=document.getElementById("countryName").innerText=regionSelect.value
+     // Enable the currency select box
+     currencySelect.disabled = true;
+     console.log()
+ }
+
+// --------------------------------------------Share Modal--------------------------------
+// Open the popup on "Share" button click
+document
+  .getElementById("openCustomPopup")
+  .addEventListener("click", function (event) {
+    const buttonRect = event.target.getBoundingClientRect();
+
+    // Toggle popup visibility
+    const customPopupContainer = document.getElementById(
+      "customPopupContainer"
+    );
+    if (
+      customPopupContainer.style.display === "none" ||
+      !customPopupContainer.style.display
+    ) {
+      // Show the popup below the button
+      customPopupContainer.style.top = buttonRect.bottom + "px";
+      customPopupContainer.style.left = buttonRect.left + "px";
+      customPopupContainer.style.display = "block";
+    } else {
+      // Hide the popup if it's already visible
+      customPopupContainer.style.display = "none";
+    }
+  });
+
+// Close the popup on "Close" (×) button click
+document
+  .getElementById("closeCustomPopup")
+  .addEventListener("click", function () {
+    document.getElementById("customPopupContainer").style.display = "none";
+  });
+
+// Facebook Share Button Functionality
+document
+  .getElementById("customFacebookShare")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    const linkToShare = "https://example.com";
+
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      linkToShare
+    )}`;
+    window.open(
+      facebookShareUrl,
+      "facebook-share-dialog",
+      "width=800,height=600"
+    );
+  });
+
+// Copy Link Functionality
+document
+  .getElementById("customCopyLink")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    const linkToCopy = "https://example.com";
+
+    navigator.clipboard
+      .writeText(linkToCopy)
+      .then(() => {
+        alert("Link copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Failed to copy: ", err);
+      });
+  });
 
 // ----------------------------------------  bookmark-btn-----------------------------------
 function bookmarkItem() {
@@ -42,8 +136,19 @@ function bookmarkItem() {
   }
 }
 
+function bookmarkItemPageload() {
+  let bookmark = localStorage.getItem("bookmark");
+  let btnLove = document.getElementById("btn-love");
+  if (bookmark) {
+    btnLove.innerHTML = "<i id='bookmark-icon' class='fa-solid fa-heart'></i>";
+  } else {
+    btnLove.innerHTML =
+      "<i id='bookmark-icon' class='fa-regular fa-heart'></i>";
+  }
+}
+bookmarkItemPageload();
 // ----------------------------------------image Slider--------------------------
-const  travelImages  = [
+const travelImages = [
   {
     src: "https://images.unsplash.com/photo-1719937206220-f7c76cc23d78?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D",
     title: "Juneau Vacation Rental | 2BR | 1BA | 1,115 Sq Ft | Stairs Required",
@@ -56,76 +161,80 @@ const  travelImages  = [
     src: "https://images.unsplash.com/photo-1730774487035-05673e0c5747?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8",
     title: "Juneau Vacation Rental | Peaceful Environment",
   },
+  {
+    src: "https://images.unsplash.com/photo-1726610930930-0e1af5f2d038?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8",
+    title: "A Land Rover SUV Parked on the Side of the Road",
+  },
 ];
 
 let travelCurrentIndex = 0;
 
 // Open the slider modal
 function openTravelSlider() {
-    document.getElementById('travelSliderModal').style.display = 'flex';
-    showTravelImage(travelCurrentIndex);
+  document.getElementById("travelSliderModal").style.display = "flex";
+  showTravelImage(travelCurrentIndex);
 }
 
 // Close the slider modal
 function closeTravelSlider() {
-    document.getElementById('travelSliderModal').style.display = 'none';
+  document.getElementById("travelSliderModal").style.display = "none";
 }
 
 // Show the image at a specific index
 function showTravelImage(index) {
-    const imageElement = document.getElementById('travelSliderImage');
-    const titleElement = document.getElementById('travelSliderTitle');
-    const countElement = document.getElementById('travelSliderCount');
+  const imageElement = document.getElementById("travelSliderImage");
+  const titleElement = document.getElementById("travelSliderTitle");
+  const countElement = document.getElementById("travelSliderCount");
 
-    imageElement.src = travelImages[index].src;
-    titleElement.textContent = travelImages[index].title;
-    countElement.textContent = `${index + 1} / ${travelImages.length}`;
+  imageElement.src = travelImages[index].src;
+  titleElement.textContent = travelImages[index].title;
+  countElement.textContent = `${index + 1} / ${travelImages.length}`;
 
-    // Update button states
-    updateButtonStates();
+  // Update button states
+  updateButtonStates();
 }
 
 // Change image with next/previous buttons
 function changeTravelImage(direction) {
-    travelCurrentIndex += direction;
+  travelCurrentIndex += direction;
 
-    // Wrap around when reaching end or beginning
-    if (travelCurrentIndex < 0) {
-        travelCurrentIndex = 0;
-    } else if (travelCurrentIndex >= travelImages.length) {
-        travelCurrentIndex = travelImages.length - 1;
-    }
+  // Wrap around when reaching end or beginning
+  if (travelCurrentIndex < 0) {
+    travelCurrentIndex = 0;
+  } else if (travelCurrentIndex >= travelImages.length) {
+    travelCurrentIndex = travelImages.length - 1;
+  }
 
-    showTravelImage(travelCurrentIndex);
+  showTravelImage(travelCurrentIndex);
 }
 
 // Update the state (enabled/disabled) of the Previous and Next buttons
 function updateButtonStates() {
-    const prevButton = document.querySelector('.travel-slider-prev-btn');
-    const nextButton = document.querySelector('.travel-slider-next-btn');
+  const prevButton = document.querySelector(".travel-slider-prev-btn");
+  const nextButton = document.querySelector(".travel-slider-next-btn");
 
-    // Disable the "Previous" button if showing the first image
-    if (travelCurrentIndex === 0) {
-        prevButton.disabled = true;
-        prevButton.style.opacity = 0.5; // Optional styling to indicate disabled
-    } else {
-        prevButton.disabled = false;
-        prevButton.style.opacity = 1;
-    }
+  // Disable the "Previous" button if showing the first image
+  if (travelCurrentIndex === 0) {
+    prevButton.disabled = true;
+    prevButton.style.opacity = 0.5; // Optional styling to indicate disabled
+  } else {
+    prevButton.disabled = false;
+    prevButton.style.opacity = 1;
+  }
 
-    // Disable the "Next" button if showing the last image
-    if (travelCurrentIndex === travelImages.length - 1) {
-        nextButton.disabled = true;
-        nextButton.style.opacity = 0.5; // Optional styling to indicate disabled
-    } else {
-        nextButton.disabled = false;
-        nextButton.style.opacity = 1;
-    }
+  // Disable the "Next" button if showing the last image
+  if (travelCurrentIndex === travelImages.length - 1) {
+    nextButton.disabled = true;
+    nextButton.style.opacity = 0.5; // Optional styling to indicate disabled
+  } else {
+    nextButton.disabled = false;
+    nextButton.style.opacity = 1;
+  }
 }
 
 // ----------------------------------------travelers Modal-----------------------
 const travelCounts = {
-  adults: 2,
+  adults: 1,
   children: 0,
 };
 
@@ -148,6 +257,24 @@ function updateTravelCount(type, delta) {
     ).textContent = newCount;
     updateTravelButtonStates();
   }
+
+  let totaltraveler =
+    Number(travelCounts.adults) + Number(travelCounts.children);
+
+  if (totaltraveler > 1) {
+    document.getElementById("totalTravelers").innerText =
+      totaltraveler + " travelers";
+  }else{
+    document.getElementById("totalTravelers").innerText =
+      totaltraveler + " traveler";
+  }
+
+  let totalprice=Number(travelCounts.adults)*134+Number(travelCounts.children)*100;
+  console.log(totalprice)
+
+  document.getElementById("totalLabelTaka").innerText =
+  "$ "+totalprice ;
+  
 }
 
 function updateTravelButtonStates() {
