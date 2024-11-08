@@ -22,6 +22,10 @@
   cursor: pointer;
 }
 
+.sub-heading{
+font-size: 30px;
+}
+
 hr {
   color: grey;
   margin-bottom: 20px;
@@ -44,7 +48,9 @@ main {
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  /* position:relative; */
+}
+#region{
+  border: 1px solid #5aa1e8;
 }
 
 .back-link {
@@ -251,12 +257,13 @@ main {
   height: 400px;
 }
 
-.gallery-right .slides{
+
+
+ .gallery-slides{
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2px;
 }
-
 
 /* // ---------------------------------------image slider--------------------------- */
  /* Trigger button style */
@@ -702,6 +709,8 @@ input[type="radio"]:checked + .tab-label {
 /* ---------------------------------------------------------------------------- */
 .travel-trigger-button {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
   }
   
   .travel-modal-container {
@@ -716,7 +725,7 @@ input[type="radio"]:checked + .tab-label {
   
   .travel-modal {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    width: 300px;
+    width: 400px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -1196,10 +1205,15 @@ h2 {
   margin: 20px auto;
   background: #fff;
 }
+.discription-content,
+section ul li{
+  color: rgb(96, 93, 93);
+}
 
 .discription-container h1 {
   font-size: 24px;
   margin-bottom: 10px;
+  
 }
 
 .discription-content {
@@ -1211,6 +1225,7 @@ h2 {
 .discription-main-point {
   font-size: 16px;
   margin: 35px 0;
+  color: #000000;
 }
 
 .discription-container section {
@@ -1384,12 +1399,6 @@ h2 {
   gap: 10px;
 }
 
-/* h2 {
-    font-size: 24px;
-    font-weight: 600;
-    margin: 0 0 24px 0;
-    color: #222;
-} */
 
 .rules-grid,
 .check-times {
@@ -1446,14 +1455,6 @@ h2 {
   align-items: start;
   margin-top: 40px;
 }
-
-/* h2 {
-    font-size: 22px;
-    font-weight: 600;
-    margin: 0;
-    color: #222;
-    line-height: 1.3;
-} */
 
 .damage-description {
   font-size: 16px;
@@ -1818,10 +1819,13 @@ h2 {
   margin-bottom: 12px;
 }
 
+
 .review-text {
   color: rgb(75, 85, 99);
   margin-bottom: 16px;
   line-height: 1.5;
+  font-size: 15px;
+  font-weight: 300;
 }
 
 .read-more {
@@ -1955,7 +1959,7 @@ h2 {
 
 .modal {
   background-color: white;
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
   width: 80%;
   max-width: 500px;
@@ -1972,7 +1976,7 @@ h2 {
 
 .popup-header {
   display: flex;
-  justify-content: space-between;
+  gap:10px;
   align-items: center;
   font-size: 18px;
   font-weight: bold;
@@ -2112,9 +2116,16 @@ select[disabled] {
     display: none;
   }
 
+  .travel-slider-prev-btn, .travel-slider-next-btn{
+    bottom: 17%;
+    margin: 2px 0;
+  }
+
   /* ------------ */
 .slider-container {
   margin: 20px auto;
+  padding: 10px;
+  text-align: left;
   position: relative;
   overflow: hidden;
   border-radius: 8px;
@@ -2169,12 +2180,6 @@ select[disabled] {
 
 .slider-nav a:hover {
   opacity: 1;
-}
-
-/* Slide Content Styling */
-.slide-content {
-  text-align: center;
-  /* max-width: 80%; */
 }
 
 .slide-title {
@@ -2239,7 +2244,7 @@ select[disabled] {
 /* ----- slider end------- */
 
   .gallery-right {
-    grid-template-columns:1fr;
+    grid-template-columns:1fr 1fr;
   }
 
   .content {
@@ -2262,7 +2267,17 @@ select[disabled] {
   .member-card {
     padding: 10px 20px;
   }
-
+  .travel-modal {
+    width: 300px;
+  }
+  .date-grid {
+    grid-template-columns: 1fr;
+    gap:5px;
+}
+.date-box, .travelers-box {
+  display: flex;
+  justify-content: space-between;
+}
   /* only mobile device */
 .price-container-mobile {
   display: flex;
@@ -2330,6 +2345,12 @@ select[disabled] {
   transition: background-color 0.2s;
 }
 
+.bed-section-container,
+.spaces-container,
+.discription-container {
+  padding-right: 0px;
+}
+
 .book-now-mobile:hover {
   background-color: #0077ed;
 }
@@ -2374,7 +2395,7 @@ select[disabled] {
   .refund-secton-mobile{
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
   }
 
   .progress-line {
@@ -2485,5 +2506,62 @@ select[disabled] {
 .footer-container,
 .contact-section {
   grid-template-columns: 1fr;
+}
+
+
+/* ------------------- */
+.gallery-right {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.gallery-slides {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.gallery-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.gallery-slide.active {
+  opacity: 1;
+}
+
+.gallery-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-slider-nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.gallery-slider-nav input[type="radio"] {
+  display: none;
+}
+
+.gallery-slider-nav label {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.gallery-slider-nav label.active {
+  background-color: #333;
 }
 }

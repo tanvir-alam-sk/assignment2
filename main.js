@@ -1,58 +1,3 @@
-//   --------------------- Country MODAL-----------------
- // Get the modal container
- let modalContainer = document.getElementById("modalContainer");
-
- // Function to open modal
- function openCountryModal() {
-     modalContainer.classList.add("show");
- }
-
- // Function to close modal
- function closeCountryModal() {
-     modalContainer.classList.remove("show");
- }
-
- // Close modal when clicking outside
- modalContainer.addEventListener("click", function (event) {
-     if (event.target === modalContainer) {
-         closeCountryModal();
-     }
- });
-
- // Close modal with Escape key
- document.addEventListener("keydown", function (event) {
-     if (event.key === "Escape" && modalContainer.classList.contains("show")) {
-         closeCountryModal();
-     }
- });
-
- // Mapping of regions to their currencies
- const regionCurrencyMap = {
-     "Portugal": ["EUR"],
-     "United States": ["USD"],
-     "Canada": ["CAD"],
-     "Germany": ["EUR"],
-     // Add more region-currency pairs as needed
- };
-
- // Function to update currency options based on selected region
- function updateCurrencyOptions() {
-     const regionSelect = document.getElementById("region");
-     const currencySelect = document.getElementById("currency");
-     const selectedRegion = regionSelect.value;
-
-     // Clear existing currency options
-     currencySelect.innerText = "";
-
-     // Get the currency options for the selected region
-     const currencies = regionCurrencyMap[selectedRegion];
-     currencySelect.value=currencies;
-
-     let countryName=document.getElementById("countryName").innerText=regionSelect.value
-     // Enable the currency select box
-     currencySelect.disabled = true;
-     console.log()
- }
 
 // --------------------------------------------Share Modal--------------------------------
 // Open the popup on "Share" button click
@@ -71,7 +16,7 @@ document
     ) {
       // Show the popup below the button
       customPopupContainer.style.top = buttonRect.bottom + "px";
-      customPopupContainer.style.left = buttonRect.left + "px";
+      // customPopupContainer.style.left = buttonRect.left + "px";
       customPopupContainer.style.display = "block";
     } else {
       // Hide the popup if it's already visible
@@ -216,7 +161,7 @@ function updateButtonStates() {
   // Disable the "Previous" button if showing the first image
   if (travelCurrentIndex === 0) {
     prevButton.disabled = true;
-    prevButton.style.opacity = 0.5; // Optional styling to indicate disabled
+    prevButton.style.opacity = 0.5;
   } else {
     prevButton.disabled = false;
     prevButton.style.opacity = 1;
@@ -225,7 +170,7 @@ function updateButtonStates() {
   // Disable the "Next" button if showing the last image
   if (travelCurrentIndex === travelImages.length - 1) {
     nextButton.disabled = true;
-    nextButton.style.opacity = 0.5; // Optional styling to indicate disabled
+    nextButton.style.opacity = 0.5; 
   } else {
     nextButton.disabled = false;
     nextButton.style.opacity = 1;
@@ -335,3 +280,34 @@ window.addEventListener("resize", () => {
 // Initialize button states
 updateTravelButtonStates();
 // ----------------------------------------travelers Modal-----------------------
+
+
+
+
+// ------------------
+const slides = document.querySelectorAll('.gallery-slide');
+    const navButtons = document.querySelectorAll('.gallery-slider-nav label');
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+
+      navButtons.forEach((button, i) => {
+        button.classList.toggle('active', i === index);
+      });
+    }
+
+    navButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        currentIndex = index;
+        showSlide(currentIndex);
+      });
+    });
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    }, 5000);
+
